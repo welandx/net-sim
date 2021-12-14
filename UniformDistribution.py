@@ -50,5 +50,5 @@ class UniformDistribution:
         return c/(2**32-1)
 
     def extract_xy_number(self,x,y):
-        c = self.extract_number()
+        c = self.extract_01_number()
         return c*(y-x) + x
