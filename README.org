@@ -1,6 +1,5 @@
-#+TITLE: Readme
+#+TITLE: A Simple Net Simulator
 
-* A Simple Net Simulator
 #+begin_quote
 include two module: simulator and an example using Aloha
 #+end_quote
