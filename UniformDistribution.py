@@ -48,3 +48,7 @@ class UniformDistribution:
     def extract_01_number(self):
         c = self.extract_number()
         return c/(2**32-1)
+
+    def extract_xy_number(self,x,y):
+        c = self.extract_number()
+        return c*(y-x) + x
