@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
 
+from Event import event
+from node import node
 
-import event
+gen_message = event(B)
+send = event(C)
 
-En = event()
-messageGen=En.newEvent(1,"gen",1)
-send=En.newEvent(2,"send",2)
+node(10)
+epochs=10
+
+for x in epochs:
+    pass
