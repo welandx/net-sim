@@ -1,4 +1,4 @@
-from RandTimeGenerator import RandTimeGenerator
+from RandTimeGenerator import RandTimeGenerator 
 from NormalDistribution import NormalDistribution
 from datetime import datetime
 
@@ -40,4 +40,12 @@ class Event:
         self.event_state = new_state
 
 
+class send(Event):
+    def __init__(self, event_name, event_type, event_nums):
+        super().__init__(event_name, event_type, event_nums)
+        rd=RandTimeGenerator()
+        self.duration=rd.nd_time_generate()
 
+class gen(Event):
+    def __init__(self, event_name, event_type, event_nums):
+        super().__init__(event_name, event_type, event_nums)
