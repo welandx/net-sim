@@ -39,6 +39,10 @@ class Event:
     def event_change_state(self, new_state):
         self.event_state = new_state
 
+    def run(self):
+        self.event_state = "Success"
+        return  self.event_state
+
 
 class Send(Event):
     def __init__(self, event_name, event_type, event_nums):
