@@ -40,10 +40,15 @@ class Simulator:
         return self.next_time
 
     def b_phrase(self):
+        print("This is b phrase")
+
+    def c_pharese(self):
+        print("This is c phrase")
 
 
-    def c_phrase(self):
-        print()
+
+
+
 c = Event("tcp","tcp","1")
 c.ud_event_initialize("0",1639558635,1639559635)
 d = Event("tcp1","tcp","1")
