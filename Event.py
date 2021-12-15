@@ -4,9 +4,11 @@ from datetime import datetime
 
 
 class Event:
-    def __init__(self, event_type):
+    def __init__(self, event_name, event_type, event_nums):
         self.event_id = None
-        self.type = event_type
+        self.event_name = event_name
+        self.event_nums = event_nums
+        self.event_type = event_type
         self.event_date = None
         self.event_state = None
         self.duration = None
