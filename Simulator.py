@@ -12,6 +12,8 @@ class Simulator:
         self.next_next_time = None
         self.total_time = 0
         self.due_now_list = []
+        self.b_phrase_success = 0
+        self.c_phrase_success = 0
 
     def add_event(self,event):
         self.event_dict[event] = event.event_date
@@ -25,8 +27,6 @@ class Simulator:
         self.event_list = list(self.event_dict)
 
     def a_phrase(self):
-        self.current_time = 0 # 从零开始
-
         self.next_time = self.event_list[0].event_date
         # 此时就得到了最近的时间
 
@@ -44,15 +44,22 @@ class Simulator:
 
         return self.next_time
 
+    def cal_success_times(self,phrase,*event):
+        if phrase == "C" and event.event_state == "Success":
+            self.c_phrase_success += 1
+        elif phrase == "B" and event.event_state == "Success":
+            self.b_phrase_success += 1
+
     def b_phrase(self, *event):
         self.current_time = event.event_date
         event.run()
+        self.cal_success_times("B",event)
 
     def c_pharese(self, *event):
         self.current_time = event.event_date
         event.run()
+        self.cal_success_times("C",event)
         print("C Phrase")
-
 
 
 
