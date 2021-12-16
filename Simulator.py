@@ -36,7 +36,7 @@ class Simulator:
         self.event_list = list(self.event_list)
         self.next_time = self.event_list[0][0].event_date
         # 此时就得到了最近的时间
-
+        self.event_list.clear()
         self.due_now_list.clear()
 
 
@@ -49,7 +49,6 @@ class Simulator:
 
         for temp in self.due_now_list:
             self.event_dict.pop(temp)
-
 
         return self.due_now_list
 
