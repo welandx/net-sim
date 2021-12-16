@@ -7,17 +7,18 @@ class controller:
         self.un=UniformDistribution()
         self.p_gen=p_gen
         self.p_send=p_send
+        self.nums=nums
         self.node=node(nums)
         self.sim=Simulator()
         self.ep=ep
 
-    def gen(self, ID):
+    def gen(self):
         property=self.un.extract_01_number()
-        if property < self.p_gen & self.node.get_status!=1:
-            self.node.gen_message(ID)
-            gen=Event("gen", 1, ID)
-            self.sim.add_event(gen)
-            self.sim.a_phrase()
+        for ID in range(self.nums):
+            if property < self.p_gen or self.node.get_status!=1:
+                self.node.gen_message(ID)
+                gen=Event("gen", "B", ID)
+                self.sim.event_list.append(gen)
             
     def send(self):
         property=self.un.extract_01_number()
@@ -25,13 +26,15 @@ class controller:
             self.node.send()
             # addevent(id)
 
-    def reset(self, success):
+    def reset(self):
+        success=sim.success_ID
         for x in success:
             self.node.send(x)
     
     def start(self):
-        for i in self.ep:
-            gen()
-            reset()
+        for i in range(self.ep):
+            self.gen()
+            self.sim.run(self.sim.event_list)
+            self.reset()
     
 

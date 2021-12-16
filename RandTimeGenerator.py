@@ -11,7 +11,7 @@ class RandTimeGenerator:
     def nd_time_generate(self, miu, sigma):
         return round(self.nd_time_initialize.normal_distribution(miu,sigma))
 
-    def nd_time_generate(self):
+    def time_generate(self):
         return round(self.nd_time_initialize.standard_normal_distribution())
 
     def ud_time_generate(self,x,y):
