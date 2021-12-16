@@ -7,7 +7,6 @@ class Simulator:
     def __init__(self):
         self.event_dict = {}
         self.event_list = []
-        self.temp_dict = {}
         self.current_time = 0
         self.next_time = None
         self.next_next_time = None
