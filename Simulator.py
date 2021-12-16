@@ -3,6 +3,7 @@ from NormalDistribution import NormalDistribution
 import time
 from RandTimeGenerator import RandTimeGenerator
 
+
 class Simulator:
     def __init__(self):
         self.event_dict = {}
@@ -15,21 +16,20 @@ class Simulator:
         self.due_c_list = []
         self.b_phrase_success = 0
         self.c_phrase_success = 0
-        self.success_ID=[]
+        self.success_ID = []
 
-    def add_event(self,event):
+    def add_event(self, event):
         self.event_dict[event] = event.event_date
         #print("Add a new event:" + event.event_name )
         #print("*** Event ID: " + str(event.event_nums))
         #print("+++ Event Type: " + event.event_type)
         #print("event date")
-        #print(event.event_date)
-        #print("----------------------")
-
+        # print(event.event_date)
+        # print("----------------------")
 
     def arrange_event(self):
-        self.event_list = sorted(self.event_dict.items(), key=lambda x: x[1], reverse=False)
-
+        self.event_list = sorted(
+            self.event_dict.items(), key=lambda x: x[1], reverse=False)
 
     def a_phrase(self):
         self.event_list = list(self.event_list)
@@ -49,20 +49,21 @@ class Simulator:
         self.event_list.clear()
         return self.due_now_list
 
-    def cal_success_times(self,phrase,event_state,event_nums):
+    def cal_success_times(self, phrase, event_state, event_nums):
         if phrase == "C" and event_state == "Success":
             self.c_phrase_success += 1
         elif phrase == "B" and event_state == "Success":
             self.b_phrase_success += 1
             self.success_ID.append(event_nums)
 
-    def b_phrase(self , *event_list):
+    def b_phrase(self, *event_list):
         #print("B phrase")
         for temp in event_list:
-            #self.due_c_list.append(temp[0].run(self.current_time,self.next_time,self.next_next_time,0))
-            temp[0].run(self.current_time,self.next_time,self.next_next_time)
+            # self.due_c_list.append(temp[0].run(self.current_time,self.next_time,self.next_next_time,0))
+            temp[0].run(self.current_time, self.next_time, self.next_next_time)
             self.current_time = temp[0].event_date
-            self.cal_success_times("B", temp[0].event_state,temp[0].event_nums)
+            self.cal_success_times(
+                "B", temp[0].event_state, temp[0].event_nums)
         self.due_now_list.clear()
 
     def c_pharese(self, *event_list):
@@ -72,46 +73,39 @@ class Simulator:
                 self.current_time = temp[0].event_date
                 temp[0].run()
                 print(temp[0].event_nums)
-                self.cal_success_times("C", temp[0].event_state,temp[0].event_nums)
+                self.cal_success_times(
+                    "C", temp[0].event_state, temp[0].event_nums)
         self.due_c_list.clear()
 
-    def run(self,event_list):
+    def run(self, event_list):
         for i in event_list:
             self.add_event(i)
         while len(self.event_dict) != 0:
             self.arrange_event()
             self.a_phrase()
-            #print(self.current_time)
-            #print(self.next_time)
+            # print(self.current_time)
+            # print(self.next_time)
 
             self.b_phrase(self.due_now_list)
-            #print(self.current_time)
-            #print(self.next_time)
-            #print(self.b_phrase_success)
+            # print(self.current_time)
+            # print(self.next_time)
+            # print(self.b_phrase_success)
 
             self.c_pharese(self.due_c_list)
-            #print(self.current_time)
-            #print(self.next_time)
-            #print(self.c_phrase_success)
-
-
+            # print(self.current_time)
+            # print(self.next_time)
+            # print(self.c_phrase_success)
 
 
 #Sim = Simulator()
 #a = Event("TCP","TCP",0)
 #b = Event("TCP1","TCP",1)
 #
-#a.ud_event_initialize("0",0,1)
-#print(a.event_date)
+# a.ud_event_initialize("0",0,1)
+# print(a.event_date)
 #
-#b.ud_event_initialize("0",101,200)
+# b.ud_event_initialize("0",101,200)
 #
 #c  = [b,a]
 #
-#Sim.run(c)
-
-
-
-
-
-
+# Sim.run(c)

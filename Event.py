@@ -1,4 +1,4 @@
-from RandTimeGenerator import RandTimeGenerator 
+from RandTimeGenerator import RandTimeGenerator
 from NormalDistribution import NormalDistribution
 from datetime import datetime
 
@@ -41,6 +41,7 @@ class Event:
 
     def run(self):
         self.event_state = "Success"
-        self.next_event = Event("UDP1","UDP",0)
-        self.next_event.ud_event_initialize("0",self.event_date+2, self.event_date + 20)
-        return  self.next_event
+        self.next_event = Event("UDP1", "UDP", 0)
+        self.next_event.ud_event_initialize(
+            "0", self.event_date+2, self.event_date + 20)
+        return self.next_event
