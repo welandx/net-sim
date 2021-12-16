@@ -35,10 +35,14 @@ class Simulator:
         self.event_list = list(self.event_list)
         self.next_time = self.event_list[0][0].event_date
         # 此时就得到了最近的时间
+<<<<<<< HEAD
 
         self.due_now_list.clear()
 
+=======
+>>>>>>> 92a24d530ac02330eb2cfee628273de5b33f427b
 
+        self.due_now_list.clear()
         for temp in self.event_list:
             if temp[0].event_date == self.next_time:
                 self.due_now_list.append(temp[0])
@@ -75,14 +79,15 @@ class Simulator:
         for temp in event_list:
             self.current_time = temp[0].event_date
             temp[0].run()
-            self.cal_success_times("C", temp[0].event_state)
+            print(temp[0].event_nums)
+            self.cal_success_times("C", temp[0].event_state,temp[0].event_nums)
         self.due_c_list.clear()
 
     def run(self,event_list):
         for i in event_list:
             self.add_event(i)
-        self.arrange_event()
         while len(self.event_dict) != 0:
+            self.arrange_event()
             self.a_phrase()
             print(self.current_time)
             print(self.next_time)
@@ -98,19 +103,22 @@ class Simulator:
             print(self.c_phrase_success)
 
 
-#Sim = Simulator()
-#a = Event("TCP","TCP",0)
-#b = Event("TCP1","TCP",1)
-#
-#a.ud_event_initialize("0",0,1)
-#print(a.event_date)
-#
-#
-#b.ud_event_initialize("0",101,200)
-#
-#c  = [b,a]
-#
-#Sim.run(c)
-#
+
+Sim = Simulator()
+a = Event("TCP","TCP",0)
+b = Event("TCP1","TCP",1)
+
+a.ud_event_initialize("0",0,1)
+print(a.event_date)
+
+b.ud_event_initialize("0",101,200)
+
+c  = [b,a]
+
+Sim.run(c)
+
+
+
+
 
 
