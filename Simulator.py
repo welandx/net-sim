@@ -60,13 +60,8 @@ class Simulator:
         #print("B phrase")
         for temp in event_list:
             #self.due_c_list.append(temp[0].run(self.current_time,self.next_time,self.next_next_time,0))
-            temp[0].run(self.current_time,self.next_time,self.next_next_time,3)
-            '''
-            这里我想要返回值为事件
-            然后逐一添加到C要做里面
-            '''
+            temp[0].run(self.current_time,self.next_time,self.next_next_time)
             self.current_time = temp[0].event_date
-            print("node : " + str(temp[0].event_nums) + " send "+str(temp[0].event_state))
             self.cal_success_times("B", temp[0].event_state,temp[0].event_nums)
         self.due_now_list.clear()
 

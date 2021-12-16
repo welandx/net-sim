@@ -44,27 +44,3 @@ class Event:
         self.next_event = Event("UDP1","UDP",0)
         self.next_event.ud_event_initialize("0",self.event_date+2, self.event_date + 20)
         return  self.next_event
-
-
-class Send(Event):
-    def __init__(self, event_name, event_type, event_nums):
-        super().__init__(event_name, event_type, event_nums)
-
-    def run(self,current_time,next_time,next_next_time, T):
-        if next_next_time - next_time > T and next_time - current_time > T :
-            self.event_state = "Success"
-            return self.event_state
-        else:
-            self.event_state = "Failed"
-            return self.event_state
-
-
-
-class Gen(Event):
-    def __init__(self, event_name, event_type, event_nums):
-        super().__init__(event_name, event_type, event_nums)
-        self.message = ""
-
-
-
-

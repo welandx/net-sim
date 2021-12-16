@@ -1,11 +1,11 @@
 from node import node
-from Event import Send as Event
+from aloha_event import Send as Event
 #from Event import Event
 from Simulator import Simulator
 from UniformDistribution import UniformDistribution
 from RandTimeGenerator import RandTimeGenerator as rtg
 class controller:
-    def __init__(self, p_gen, p_send, nums, ep) :
+    def __init__(self, p_gen, p_send, nums, ep,T) :
         self.un=UniformDistribution()
         self.rtg=rtg()
         self.p_gen=p_gen
@@ -15,6 +15,10 @@ class controller:
         self.sim=Simulator()
         self.ep=ep
         self.el=[]
+        self.T=T
+        self.All=0
+        self.success=0
+        self.time=0
 
     def gen(self):
         #property=self.un.extract_01_number()
@@ -22,14 +26,15 @@ class controller:
         for ID in range(self.nums):
             if property < self.p_gen or self.node.get_status==1:
                 self.node.gen_message(ID)
-                gen=Event("gen", "B", ID)
+                gen=Event("gen", "B", ID, self.T)
                 gen.ud_event_initialize("0",0,100)
                 self.el.append(gen)
             
     def send(self):
         property=self.un.extract_01_number()
-        if property < self.p_send & self.node.get_status==1:
-            self.node.send()
+        for ID in range(self.nums):
+            if property < self.p_send & self.node.get_status==1:
+                self.node.send(ID)
             # addevent(id)
 
     def reset(self):
@@ -41,10 +46,14 @@ class controller:
     
     def start(self):
         for i in range(self.ep):
-            print("epoch: "+str(i))
+            #print("epoch: "+str(i))
             self.gen()
+            self.All+=self.el.__len__()
             self.sim.run(self.el)
-            print(self.sim.success_ID)
+            self.success+=self.sim.success_ID.__len__()
+            self.time+=self.sim.current_time
+
+            #print(self.sim.success_ID)
             self.reset()
     
 
