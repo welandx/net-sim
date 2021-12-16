@@ -53,12 +53,12 @@ class Simulator:
 
         return self.due_now_list
 
-    def cal_success_times(self,phrase,event_state):
+    def cal_success_times(self,phrase,event_state,event_nums):
         if phrase == "C" and event_state == "Success":
             self.c_phrase_success += 1
         elif phrase == "B" and event_state == "Success":
             self.b_phrase_success += 1
-            self.success_ID.append(event.event_nums)
+            self.success_ID.append(event_nums)
 
     def b_phrase(self , *event_list):
         for temp in event_list:
@@ -69,7 +69,7 @@ class Simulator:
             然后逐一添加到C要做里面
             '''
             print(temp[0].event_state)
-            self.cal_success_times("B", temp[0].event_state)
+            self.cal_success_times("B", temp[0].event_state,temp[0].event_nums)
         self.due_now_list.clear()
 
     def c_pharese(self, *event_list):
