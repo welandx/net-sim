@@ -1,6 +1,6 @@
 from node import node
-#from Event import Send as Event
-from Event import Event
+from Event import Send as Event
+#from Event import Event
 from Simulator import Simulator
 from UniformDistribution import UniformDistribution
 class controller:

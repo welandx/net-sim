@@ -35,7 +35,7 @@ class Simulator:
         self.event_list = list(self.event_list)
         self.next_time = self.event_list[0][0].event_date
         # 此时就得到了最近的时间
-        self.event_list.clear()
+
         self.due_now_list.clear()
 
 
@@ -48,7 +48,7 @@ class Simulator:
 
         for temp in self.due_now_list:
             self.event_dict.pop(temp)
-
+        self.event_list.clear()
         return self.due_now_list
 
     def cal_success_times(self,phrase,event_state,event_nums):
@@ -98,19 +98,19 @@ class Simulator:
             print(self.c_phrase_success)
 
 
-Sim = Simulator()
-a = Event("TCP","TCP",0)
-b = Event("TCP1","TCP",1)
-
-a.ud_event_initialize("0",0,1)
-print(a.event_date)
-
-
-b.ud_event_initialize("0",101,200)
-
-c  = [b,a]
-
-Sim.run(c)
-
+#Sim = Simulator()
+#a = Event("TCP","TCP",0)
+#b = Event("TCP1","TCP",1)
+#
+#a.ud_event_initialize("0",0,1)
+#print(a.event_date)
+#
+#
+#b.ud_event_initialize("0",101,200)
+#
+#c  = [b,a]
+#
+#Sim.run(c)
+#
 
 
