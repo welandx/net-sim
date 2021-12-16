@@ -2,22 +2,16 @@
 
 from Event import Event as event
 from node import node as nd
-from controller import control_node as cn
+from controller import controller as cn
+
 nums=10
 epochs=10
 
-gen_message = event(B)
-send = event(C)
 
-node=nd(10)
+control=cn(0.1,0.05,10,10)
+
 
 def init_event():
-    for i in nums:
-        node.gen_message(i)
-        if node.get_status(i) == 1 :
-            pass
-        node.send(i)
-    
     pass
 
 def start_sim():
