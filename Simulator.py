@@ -15,6 +15,7 @@ class Simulator:
         self.due_c_list = []
         self.b_phrase_success = 0
         self.c_phrase_success = 0
+        self.success_ID=[]
 
     def add_event(self,event):
         self.event_dict[event] = event.event_date
@@ -50,6 +51,7 @@ class Simulator:
             self.c_phrase_success += 1
         elif phrase == "B" and event.event_state == "Success":
             self.b_phrase_success += 1
+            self.success_ID.pop(event.event_nums)
 
     def b_phrase(self, *event_list):
         for temp in event_list:
