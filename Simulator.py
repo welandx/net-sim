@@ -19,12 +19,12 @@ class Simulator:
 
     def add_event(self,event):
         self.event_dict[event] = event.event_date
-        print("Add a new event:" + event.event_name )
-        print("*** Event ID: " + str(event.event_nums))
-        print("+++ Event Type: " + event.event_type)
-        print("event date")
-        print(event.event_date)
-        print("----------------------")
+        #print("Add a new event:" + event.event_name )
+        #print("*** Event ID: " + str(event.event_nums))
+        #print("+++ Event Type: " + event.event_type)
+        #print("event date")
+        #print(event.event_date)
+        #print("----------------------")
 
 
     def arrange_event(self):
@@ -57,24 +57,27 @@ class Simulator:
             self.success_ID.append(event_nums)
 
     def b_phrase(self , *event_list):
+        #print("B phrase")
         for temp in event_list:
-            self.current_time = temp[0].event_date
-            self.due_c_list.append(temp[0].run())
+            #self.due_c_list.append(temp[0].run(self.current_time,self.next_time,self.next_next_time,0))
+            temp[0].run(self.current_time,self.next_time,self.next_next_time,3)
             '''
             这里我想要返回值为事件
             然后逐一添加到C要做里面
             '''
-            print(temp[0].event_state)
+            self.current_time = temp[0].event_date
+            print("node : " + str(temp[0].event_nums) + " send "+str(temp[0].event_state))
             self.cal_success_times("B", temp[0].event_state,temp[0].event_nums)
         self.due_now_list.clear()
 
     def c_pharese(self, *event_list):
-        print("C phrase")
-        for temp in event_list:
-            self.current_time = temp[0].event_date
-            temp[0].run()
-            print(temp[0].event_nums)
-            self.cal_success_times("C", temp[0].event_state,temp[0].event_nums)
+        if event_list[0].__len__() != 0:
+            print("C phrase")
+            for temp in event_list:
+                self.current_time = temp[0].event_date
+                temp[0].run()
+                print(temp[0].event_nums)
+                self.cal_success_times("C", temp[0].event_state,temp[0].event_nums)
         self.due_c_list.clear()
 
     def run(self,event_list):
@@ -83,33 +86,34 @@ class Simulator:
         while len(self.event_dict) != 0:
             self.arrange_event()
             self.a_phrase()
-            print(self.current_time)
-            print(self.next_time)
+            #print(self.current_time)
+            #print(self.next_time)
 
             self.b_phrase(self.due_now_list)
-            print(self.current_time)
-            print(self.next_time)
-            print(self.b_phrase_success)
+            #print(self.current_time)
+            #print(self.next_time)
+            #print(self.b_phrase_success)
 
             self.c_pharese(self.due_c_list)
-            print(self.current_time)
-            print(self.next_time)
-            print(self.c_phrase_success)
+            #print(self.current_time)
+            #print(self.next_time)
+            #print(self.c_phrase_success)
 
 
 
-Sim = Simulator()
-a = Event("TCP","TCP",0)
-b = Event("TCP1","TCP",1)
 
-a.ud_event_initialize("0",0,1)
-print(a.event_date)
-
-b.ud_event_initialize("0",101,200)
-
-c  = [b,a]
-
-Sim.run(c)
+#Sim = Simulator()
+#a = Event("TCP","TCP",0)
+#b = Event("TCP1","TCP",1)
+#
+#a.ud_event_initialize("0",0,1)
+#print(a.event_date)
+#
+#b.ud_event_initialize("0",101,200)
+#
+#c  = [b,a]
+#
+#Sim.run(c)
 
 
 

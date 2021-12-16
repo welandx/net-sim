@@ -51,12 +51,11 @@ class Send(Event):
         super().__init__(event_name, event_type, event_nums)
 
     def run(self,current_time,next_time,next_next_time, T):
-        T=0
-        if next_next_time - next_time <= T or next_time - current_time <= T :
-            self.event_state = "Failed"
+        if next_next_time - next_time > T and next_time - current_time > T :
+            self.event_state = "Success"
             return self.event_state
         else:
-            self.event_state = "Success"
+            self.event_state = "Failed"
             return self.event_state
 
 
