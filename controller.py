@@ -17,7 +17,6 @@ class controller:
             self.node.gen_message(ID)
             gen=Event("gen", 1, ID)
             self.sim.add_event(gen)
-            self.sim.a_phrase()
             
     def send(self):
         property=self.un.extract_01_number()
@@ -25,13 +24,15 @@ class controller:
             self.node.send()
             # addevent(id)
 
-    def reset(self, success):
+    def reset(self):
+        success=sim.getsuccess()
         for x in success:
             self.node.send(x)
     
     def start(self):
         for i in self.ep:
             gen()
+            self.sim.a_phrase()
             reset()
     
 
