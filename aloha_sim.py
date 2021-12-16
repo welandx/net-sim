@@ -10,6 +10,7 @@ epochs=10
 
 control=cn(0.1,0.05,10,10)
 
+control.start()
 
 def init_event():
     pass

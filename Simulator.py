@@ -20,8 +20,10 @@ class Simulator:
     def add_event(self,event):
         self.event_dict[event] = event.event_date
         print("Add a new event:" + event.event_name )
-        print("*** Event ID: " + str(event.event_id))
+        print("*** Event ID: " + str(event.event_nums))
         print("+++ Event Type: " + event.event_type)
+        print("event date")
+        print(event.event_date)
         print("----------------------")
 
     def arrange_event(self):
@@ -51,9 +53,9 @@ class Simulator:
             self.c_phrase_success += 1
         elif phrase == "B" and event.event_state == "Success":
             self.b_phrase_success += 1
-            self.success_ID.pop(event.event_nums)
+            self.success_ID.append(event.event_nums)
 
-    def b_phrase(self, *event_list):
+    def b_phrase(self , *event_list):
         for temp in event_list:
             self.current_time = temp.event_date
             self.due_c_list.append(temp.run())

@@ -43,10 +43,10 @@ class Event:
 class Send(Event):
     def __init__(self, event_name, event_type, event_nums):
         super().__init__(event_name, event_type, event_nums)
-        rd=RandTimeGenerator()
-        self.duration=rd.nd_time_generate()
+        super().nd_event_initialize(1,50,20)
 
     def run(self,current_time,next_time,next_next_time, T):
+        T=0
         if next_next_time - next_time <= T or next_time - current_time <= T :
             self.event_state = "Failed"
             return self.event_state
