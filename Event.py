@@ -45,9 +45,8 @@ class Event:
 
 
 class Send(Event):
-    def __init__(self, event_name, event_type, event_nums):
-        super().__init__(event_name, event_type, event_nums)
-        super().nd_event_initialize(1,50,20)
+    #def __init__(self, event_name, event_type, event_nums):
+    #    super().__init__(event_name, event_type, event_nums)
 
     def run(self,current_time,next_time,next_next_time, T):
         T=0

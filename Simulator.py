@@ -102,14 +102,15 @@ Sim = Simulator()
 a = Event("TCP","TCP",0)
 b = Event("TCP1","TCP",1)
 
-a.ud_event_initialize("0",1,100)
+a.ud_event_initialize("0",0,1)
+print(a.event_date)
+
+
 b.ud_event_initialize("0",101,200)
 
 c  = [b,a]
 
 Sim.run(c)
-
-
 
 
 
