@@ -12,6 +12,7 @@ class Simulator:
         self.next_next_time = None
         self.total_time = 0
         self.due_now_list = []
+        self.due_c_list = []
         self.b_phrase_success = 0
         self.c_phrase_success = 0
 
@@ -42,7 +43,7 @@ class Simulator:
         for temp in self.due_now_list:
             self.event_dict.pop(temp)
 
-        return self.next_time
+        return self.due_now_list
 
     def cal_success_times(self,phrase,*event):
         if phrase == "C" and event.event_state == "Success":
@@ -50,16 +51,46 @@ class Simulator:
         elif phrase == "B" and event.event_state == "Success":
             self.b_phrase_success += 1
 
-    def b_phrase(self, *event):
-        self.current_time = event.event_date
-        event.run()
-        self.cal_success_times("B",event)
+    def b_phrase(self, *event_list):
+        for temp in event_list:
+            self.current_time = temp.event_date
+            self.due_c_list.append(temp.run())
+            '''
+            这里我想要返回值为事件
+            然后逐一添加到C要做里面
+            '''
+            self.cal_success_times("B", temp)
+        self.due_now_list.clear()
 
-    def c_pharese(self, *event):
-        self.current_time = event.event_date
-        event.run()
-        self.cal_success_times("C",event)
-        print("C Phrase")
+    def c_pharese(self, *event_list):
+        print("C phrase")
+        for temp in event_list:
+            self.current_time = temp.event_date
+            temp.run()
+            self.cal_success_times("C", temp)
+        self.due_c_list.clear()
+
+    def run(self,event_list):
+        for i in event_list:
+            self.add_event(i)
+        self.arrange_event()
+        while len(self.event_dict) != 0:
+            self.a_phrase()
+            print(self.current_time)
+            print(self.next_time)
+
+            self.b_phrase(self.due_now_list)
+            print(self.current_time)
+            print(self.next_time)
+            print(self.b_phrase_success)
+
+            self.c_pharese(self.due_c_list)
+            print(self.current_time)
+            print(self.next_time)
+            print(self.c_phrase_success)
+
+
+
 
 
 
