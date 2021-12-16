@@ -41,7 +41,9 @@ class Event:
 
     def run(self):
         self.event_state = "Success"
-        return  self.event_state
+        self.next_event = Event("UDP1","UDP",0)
+        self.next_event.ud_event_initialize("0",self.event_date+2, self.event_date + 20)
+        return  self.next_event
 
 
 class Send(Event):
