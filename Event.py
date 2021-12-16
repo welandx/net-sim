@@ -40,12 +40,27 @@ class Event:
         self.event_state = new_state
 
 
-class send(Event):
+class Send(Event):
     def __init__(self, event_name, event_type, event_nums):
         super().__init__(event_name, event_type, event_nums)
         rd=RandTimeGenerator()
         self.duration=rd.nd_time_generate()
 
-class gen(Event):
+    def judge(self,current_time,next_time,next_next_time, T):
+        if next_next_time - next_time <= T or next_time - current_time <= T :
+            self.event_state = "Failed"
+            return self.event_state
+        else:
+            self.event_state = "Success"
+            return self.event_state
+
+
+
+class Gen(Event):
     def __init__(self, event_name, event_type, event_nums):
         super().__init__(event_name, event_type, event_nums)
+        self.message = ""
+
+
+
+
