@@ -1,5 +1,5 @@
 from node import node
-from Event import Event
+from Event import Send as Event
 from Simulator import Simulator
 from UniformDistribution import UniformDistribution
 class controller:
@@ -15,7 +15,7 @@ class controller:
         property=self.un.extract_01_number()
         if property < self.p_gen & self.node.get_status!=1:
             self.node.gen_message(ID)
-            gen=Event(gen, 1, ID)
+            gen=Event("gen", 1, ID)
             self.sim.add_event(gen)
             self.sim.a_phrase()
             
