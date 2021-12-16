@@ -46,7 +46,7 @@ class Send(Event):
         rd=RandTimeGenerator()
         self.duration=rd.nd_time_generate()
 
-    def judge(self,current_time,next_time,next_next_time, T):
+    def run(self,current_time,next_time,next_next_time, T):
         if next_next_time - next_time <= T or next_time - current_time <= T :
             self.event_state = "Failed"
             return self.event_state
