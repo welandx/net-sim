@@ -14,7 +14,7 @@ class Event:
         self.duration = None
         self.next_event = None
 
-    def ud_event_initialize(self, event_state, x, y):
+    def ud_event_initialize(self, event_state, x, y,acc):
         temp = NormalDistribution()
         seed = datetime.now().microsecond
         temp.initialize_generator(seed)
@@ -23,7 +23,7 @@ class Event:
 
         self.event_state = event_state
 
-        self.event_date = RandTimeGenerator().ud_time_generate(x, y)
+        self.event_date = RandTimeGenerator().ud_time_generate(x, y)/acc
 
     def nd_event_initialize(self, event_state, miu, sigma):
         temp = NormalDistribution()
